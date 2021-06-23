@@ -3,10 +3,13 @@ package com.code9.tennisplayer;
 import com.code9.tennisplayer.exception.AlreadyExistsException;
 import com.code9.tennisplayer.exception.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,15 +18,17 @@ import java.util.Optional;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final EntityManager entityManager;
 
     public void create(Player player) {
         findOneByEmail(player.getEmail());
         playerRepository.save(player);
     }
 
-    public void update(Player player) {
-        findOneById(player.getId());
-        playerRepository.save(player);
+    public void update(Player updatedPlayer) {
+        Player oldPlayer = findOneById(updatedPlayer.getId());
+        checkEmailIsUnique(oldPlayer, updatedPlayer.getEmail());
+        playerRepository.save(updatedPlayer);
     }
 
     public void delete(Long id) {
@@ -47,11 +52,26 @@ public class PlayerService {
     }
 
     public List<Player> findAll() {
+        /*
+        Session session = entityManager.unwrap(Session.class);
+        Filter filter = session.enableFilter("deletedPlayersFilter");
+        filter.setParameter("isDeleted", isDeleted);
+        List<Player> players =  playerRepository.findAll();
+        session.disableFilter("deletedPlayersFilter");
+        return players;
+        */
+
         return playerRepository.findAll();
     }
 
     public Page<Player> findAll(Pageable pageable) {
         return playerRepository.findAll(pageable);
+    }
+
+    private void checkEmailIsUnique(Player oldPlayer, String newEmail) {
+        // if email is not changed, it remains unique
+        if(oldPlayer.getEmail().equals(newEmail)) { return; }
+        findOneByEmail(newEmail);
     }
 
 }
