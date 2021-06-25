@@ -22,17 +22,17 @@ public class PlayerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@Valid @RequestBody final PlayerDto dto) {
+    public void createPlayer(@Valid @RequestBody final PlayerDto dto) {
         playerService.create(playerMapper.dtoToNewEntity(dto));
     }
 
     @PutMapping
-    public void updateProduct(@Valid @RequestBody final PlayerDto dto) {
+    public void updatePlayer(@Valid @RequestBody final PlayerDto dto) {
         playerService.update(playerMapper.dtoToEntity(dto));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable("id") final Long id) {
+    public void deletePlayer(@PathVariable("id") final Long id) {
         playerService.delete(id);
     }
 
