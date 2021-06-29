@@ -8,6 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "tennis_court")
@@ -26,6 +27,9 @@ public class TennisCourt {
 
     @Column(unique=true)
     private String name;
+
+    @OneToMany(mappedBy="tennisCourt", fetch=FetchType.LAZY)
+    private Set<Reservation> reservations;
 
     @Column
     private boolean deleted = Boolean.FALSE;
