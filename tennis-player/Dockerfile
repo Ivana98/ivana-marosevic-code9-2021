@@ -11,6 +11,6 @@ RUN ./mvnw clean package -DskipTests
 
 FROM openjdk:11-jre
 WORKDIR /app
-COPY --from=BUILD_IMAGE /app/target/discovery-server-0.0.1-SNAPSHOT.jar ./myapp.jar
-EXPOSE 8761
+COPY --from=BUILD_IMAGE /app/target/tennis-player-0.0.1-SNAPSHOT.jar ./myapp.jar
+EXPOSE 8084
 CMD ["java","-jar","myapp.jar"]

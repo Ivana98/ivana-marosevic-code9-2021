@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+    tennis-court:
+        container_name: tennis-court
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        network_mode: host
+        image: tennis-court:latest
+        environment:
+            SERVER_PORT: 8083
+        ports:
+            - 8083:8083
