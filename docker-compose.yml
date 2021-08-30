@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+    discovery-server:
+        container_name: discovery-server
+        build:
+            context: discovery-server
+            dockerfile: Dockerfile
+        image: discovery-server:latest
+        ports:
+            - 8761:8761
+
+    api-gateway:
+        container_name: api-gateway
+        build:
+            context: api-gateway-service
+            dockerfile: Dockerfile
+        network_mode: host
+        image: api-gateway:latest
+        ports:
+            - 8080:8080

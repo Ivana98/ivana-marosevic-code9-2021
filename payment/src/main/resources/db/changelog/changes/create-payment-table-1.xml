@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Ivana" id="payment-1">
+        <createTable tableName="payment">
+            <column autoIncrement="true" name="id" type="BIGINT(20)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="deleted" type="BIT(1)"/>
+            <column name="pay_date" type="DATETIME(6)"/>
+            <column name="payment_method" type="VARCHAR(255)"/>
+            <column name="reservation_id" type="BIGINT(20)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+    tennis-player:
+        container_name: tennis-player
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        network_mode: host
+        image: tennis-player:latest
+        environment:
+            SERVER_PORT: 8084
+        ports:
+            - 8084:8084

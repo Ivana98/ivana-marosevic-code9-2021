@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+    payment1:
+        container_name: payment1
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        network_mode: host
+        image: payment:latest
+        environment:
+            SERVER_PORT: 8081
+        ports:
+            - 8081:8081
+
+    # payment2:
+    #     container_name: payment2
+    #     build:
+    #         context: ./
+    #         dockerfile: Dockerfile
+    #     image: payment:latest
+    #     environment:
+    #         SERVER_PORT: 8082
+    #     ports:
+    #         - 8082:8082
